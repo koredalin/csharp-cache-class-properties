@@ -224,7 +224,7 @@ namespace CacheProperties.Estimations
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Int"))
             {
-                throw new Exception("GetIntVal(). Not supported type of property.");
+                throw new Exception("SetIntVal(). Not supported type of property.");
             }
             this[classPropName] = newValue;
         }
@@ -235,7 +235,7 @@ namespace CacheProperties.Estimations
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Decimal"))
             {
-                throw new Exception("GetDecimalVal(). Not supported type of property.");
+                throw new Exception("SetDecimalVal(). Not supported type of property.");
             }
             this[classPropName] = newValue;
         }
@@ -246,7 +246,7 @@ namespace CacheProperties.Estimations
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Bool"))
             {
-                throw new Exception("GetBoolVal(). Not supported type of property.");
+                throw new Exception("SetBoolVal(). Not supported type of property.");
             }
             this[classPropName] = newValue;
         }
@@ -294,7 +294,7 @@ namespace CacheProperties.Estimations
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
-                throw new Exception("SetStrVal(). Not supported type of property.");
+                throw new Exception("SetNotEstimatedBoolVal(). Not supported type of property.");
             }
             this[classPropName] = NotEstimatedBoolYet;
         }
