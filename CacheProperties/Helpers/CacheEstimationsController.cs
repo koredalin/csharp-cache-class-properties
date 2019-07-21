@@ -11,7 +11,7 @@ namespace CacheProperties.Helpers
         /// <summary>
         /// Returns method value as an object.
         /// </summary>
-        public static object GetMethodVal(object objRef, string methodName)
+        public static object GetMethodVal(in object objRef, string methodName)
         {
             Type type = objRef.GetType();
             MethodInfo method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);

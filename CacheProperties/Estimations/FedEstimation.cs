@@ -13,7 +13,7 @@ namespace CacheProperties.Estimations
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
 
-        public delegate string CalcStringMethod();
+        public static List<string> ZeroValues = new List<string>();
 
         public string FedOutA1 { get; private set; } = NotEstimatedStringYet;
         public string FedOutA2 { get; private set; } = NotEstimatedStringYet;
@@ -93,6 +93,24 @@ namespace CacheProperties.Estimations
             foreach (string classPropName in FedProperties.AllProperties["BoolProperties"])
             {
                 GetBoolVal(classPropName);
+            };
+        }
+
+        public void ClearNotZeroValues()
+        {
+            foreach (string classPropName in FedProperties.AllProperties["IntProperties"])
+            {
+                if (GetIntVal(classPropName) != 0)
+                {
+                    ZeroValues.Remove(classPropName);
+                }
+            };
+            foreach (string classPropName in FedProperties.AllProperties["DecimalProperties"])
+            {
+                if (GetDecVal(classPropName) != 0)
+                {
+                    ZeroValues.Remove(classPropName);
+                }
             };
         }
 
@@ -200,14 +218,29 @@ namespace CacheProperties.Estimations
             result += GetIntVal("FedOutB2");
             return result;
         }
-        
-        private int CalculateB4() { return 4; }
+        private int CalculateB4()
+        {
+            ZeroValues.Add("FedOutB4");
+            return 0;
+        }
         private int CalculateB5()
         {
             return GetIntVal("FedOutB3") + GetIntVal("FedOutB4");
         }
-        private int CalculateB6() { return 6; }
-        private int CalculateB7() { return 7; }
+        private int CalculateB6()
+        {
+            int result = GetIntVal("FedOutB4");
+            if (result == 0)
+            {
+                ZeroValues.Add("FedOutB6");
+            }
+            return result;
+        }
+        private int CalculateB7()
+        {
+            ZeroValues.Add("FedOutB7");
+            return 7;
+        }
         private int CalculateB8() { return 8; }
         private int CalculateB9() { return 9; }
         private decimal CalculateC1() { return 1.1m; }
