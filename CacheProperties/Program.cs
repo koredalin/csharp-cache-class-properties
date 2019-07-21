@@ -20,9 +20,9 @@ namespace CacheProperties
                 Formatting.Indented,
                 new JsonConverter[] { new StringEnumConverter() });
 
-            Console.WriteLine("Object Properties");
+            Console.WriteLine("Object Output Properties");
             Console.WriteLine(fedEstimationsJson);
-            Console.WriteLine("Object Zero Values");
+            Console.WriteLine("Object Output Zero Values");
             Console.WriteLine(fedEstimationsZeroPropertiesValuesJson);
         }
     }
