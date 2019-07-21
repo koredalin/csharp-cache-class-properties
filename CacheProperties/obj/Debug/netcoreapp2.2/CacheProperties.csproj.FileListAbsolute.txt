@@ -1,0 +1,11 @@
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\bin\Debug\netcoreapp2.2\CacheProperties.deps.json
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\bin\Debug\netcoreapp2.2\CacheProperties.runtimeconfig.json
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\bin\Debug\netcoreapp2.2\CacheProperties.runtimeconfig.dev.json
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\bin\Debug\netcoreapp2.2\CacheProperties.dll
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\bin\Debug\netcoreapp2.2\CacheProperties.pdb
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\obj\Debug\netcoreapp2.2\CacheProperties.csprojAssemblyReference.cache
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\obj\Debug\netcoreapp2.2\CacheProperties.csproj.CoreCompileInputs.cache
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\obj\Debug\netcoreapp2.2\CacheProperties.AssemblyInfoInputs.cache
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\obj\Debug\netcoreapp2.2\CacheProperties.AssemblyInfo.cs
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\obj\Debug\netcoreapp2.2\CacheProperties.dll
+C:\Users\Hristo\source\repos\CacheProperties\CacheProperties\obj\Debug\netcoreapp2.2\CacheProperties.pdb
