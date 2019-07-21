@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace CacheProperties.Helpers
+namespace CacheProperties.Estimations
 {
-    public static class CacheEstimationsController
+    public static class CachePropertiesHelper
     {
         /// <summary>
         /// Returns method value as an object.

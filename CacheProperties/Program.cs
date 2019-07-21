@@ -11,7 +11,7 @@ namespace CacheProperties
         {
             FedEstimation feObj = new FedEstimation();
             feObj.CalculateAll();
-            feObj.ClearNotZeroValues();
+            feObj.ClearOutputNotZeros();
 
             string fedEstimationsJson = JsonConvert.SerializeObject(feObj,
                 Formatting.Indented,
