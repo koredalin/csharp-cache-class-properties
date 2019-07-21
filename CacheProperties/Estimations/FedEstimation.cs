@@ -28,33 +28,33 @@ namespace CacheProperties.Estimations
         public string OutA7 { get; private set; } = NotEstimatedStringYet;
         public string OutA8 { get; private set; } = NotEstimatedStringYet;
         public string OutA9 { get; private set; } = NotEstimatedStringYet;
-        public int? OutB1 { get; private set; }
-        public int? OutB2 { get; private set; }
-        public int? OutB3 { get; private set; }
-        public int? OutB4 { get; private set; }
-        public int? OutB5 { get; private set; }
-        public int? OutB6 { get; private set; }
-        public int? OutB7 { get; private set; }
-        public int? OutB8 { get; private set; }
-        public int? OutB9 { get; private set; }
-        public decimal? OutC1 { get; private set; }
-        public decimal? OutC2 { get; private set; }
-        public decimal? OutC3 { get; private set; }
-        public decimal? OutC4 { get; private set; }
-        public decimal? OutC5 { get; private set; }
-        public decimal? OutC6 { get; private set; }
-        public decimal? OutC7 { get; private set; }
-        public decimal? OutC8 { get; private set; }
-        public decimal? OutC9 { get; private set; }
-        public bool? OutD1 { get; private set; }
-        public bool? OutD2 { get; private set; }
-        public bool? OutD3 { get; private set; }
-        public bool? OutD4 { get; private set; }
-        public bool? OutD5 { get; private set; }
-        public bool? OutD6 { get; private set; }
-        public bool? OutD7 { get; private set; }
-        public bool? OutD8 { get; private set; }
-        public bool? OutD9 { get; private set; }
+        public int? OutB1 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB2 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB3 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB4 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB5 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB6 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB7 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB8 { get; private set; } = NotEstimatedIntYet;
+        public int? OutB9 { get; private set; } = NotEstimatedIntYet;
+        public decimal? OutC1 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC2 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC3 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC4 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC5 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC6 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC7 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC8 { get; private set; } = NotEstimatedDecimalYet;
+        public decimal? OutC9 { get; private set; } = NotEstimatedDecimalYet;
+        public bool? OutD1 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD2 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD3 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD4 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD5 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD6 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD7 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD8 { get; private set; } = NotEstimatedBoolYet;
+        public bool? OutD9 { get; private set; } = NotEstimatedBoolYet;
         #endregion
 
         /********************************************************************************************/
@@ -207,7 +207,7 @@ namespace CacheProperties.Estimations
         /********************************************************************************************/
 
         #region Set class properties values with general types
-        public void SetStrVal(string classPropName, string newValue)
+        private void SetStrVal(string classPropName, string newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -218,7 +218,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = newValue;
         }
 
-        public void SetIntVal(string classPropName, int newValue)
+        private void SetIntVal(string classPropName, int newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -229,7 +229,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = newValue;
         }
 
-        public void SetDecVal(string classPropName, decimal newValue)
+        private void SetDecVal(string classPropName, decimal newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -240,7 +240,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = newValue;
         }
 
-        public void SetBoolVal(string classPropName, bool newValue)
+        private void SetBoolVal(string classPropName, bool newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -255,7 +255,7 @@ namespace CacheProperties.Estimations
         /********************************************************************************************/
 
         #region Set Not Estimated values with general types
-        public void SetNotEstimatedStrVal(string classPropName)
+        private void SetNotEstimatedStrVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -266,7 +266,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = NotEstimatedStringYet;
         }
 
-        public void SetNotEstimatedIntVal(string classPropName)
+        private void SetNotEstimatedIntVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -277,7 +277,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = NotEstimatedIntYet;
         }
 
-        public void SetNotEstimatedDecVal(string classPropName)
+        private void SetNotEstimatedDecVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -288,7 +288,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = NotEstimatedDecimalYet;
         }
 
-        public void SetNotEstimatedBoolVal(string classPropName)
+        private void SetNotEstimatedBoolVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
