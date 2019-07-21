@@ -8,13 +8,17 @@ namespace CacheProperties.Estimations
 {
     public class FedEstimation
     {
+        #region Not Estimated Type Constants
         public static readonly string NotEstimatedStringYet = "NotEstimatedYet";
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
+        #endregion
 
+        /*******************************************************************************/
+
+        #region Estimated Class Properties
         public static List<string> OutZeroValues = new List<string>();
-
         public string OutA1 { get; private set; } = NotEstimatedStringYet;
         public string OutA2 { get; private set; } = NotEstimatedStringYet;
         public string OutA3 { get; private set; } = NotEstimatedStringYet;
@@ -51,14 +55,21 @@ namespace CacheProperties.Estimations
         public bool? OutD7 { get; private set; }
         public bool? OutD8 { get; private set; }
         public bool? OutD9 { get; private set; }
+        #endregion
 
+        /********************************************************************************************/
 
+        /// <summary>
+        /// Class Constructor
+        /// </summary>
         public FedEstimation()
         {
 
         }
 
+        /********************************************************************************************/
 
+        #region General Helpers
         /// <summary>
         /// Returns property value as an object.
         /// </summary>
@@ -67,17 +78,11 @@ namespace CacheProperties.Estimations
             get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
             set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
         }
+        #endregion
 
-        /// <summary>
-        /// Returns method value as an object.
-        /// </summary>
-        //private object GetMethodVal(string methodName)
-        //{
-        //    Type type = this.GetType();
-        //    MethodInfo method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
-        //    return method.Invoke(this, null);
-        //}
+        /********************************************************************************************/
 
+        #region General Functionalities
         public void CalculateAll()
         {
             foreach (string classPropName in FedProperties.AllProperties["StrProperties"])
@@ -115,7 +120,11 @@ namespace CacheProperties.Estimations
                 }
             };
         }
+        #endregion
 
+        /********************************************************************************************/
+
+        #region Get (Set value if not estimated) values with general types
         public string GetStrVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
@@ -193,7 +202,11 @@ namespace CacheProperties.Estimations
             this[classPropName] = result;
             return result;
         }
+        #endregion
 
+        /********************************************************************************************/
+
+        #region Set class properties values with general types
         public void SetStrVal(string classPropName, string newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
@@ -205,7 +218,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = newValue;
         }
 
-        public void SetIntVal(string classPropName, string newValue)
+        public void SetIntVal(string classPropName, int newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -216,7 +229,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = newValue;
         }
 
-        public void SetDecVal(string classPropName, string newValue)
+        public void SetDecVal(string classPropName, decimal newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -227,7 +240,7 @@ namespace CacheProperties.Estimations
             this[classPropName] = newValue;
         }
 
-        public void SetBoolVal(string classPropName, string newValue)
+        public void SetBoolVal(string classPropName, bool newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
@@ -237,7 +250,59 @@ namespace CacheProperties.Estimations
             }
             this[classPropName] = newValue;
         }
+        #endregion
 
+        /********************************************************************************************/
+
+        #region Set Not Estimated values with general types
+        public void SetNotEstimatedStrVal(string classPropName)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.String"))
+            {
+                throw new Exception("SetNotEstimatedStrVal(). Not supported type of property.");
+            }
+            this[classPropName] = NotEstimatedStringYet;
+        }
+
+        public void SetNotEstimatedIntVal(string classPropName)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.String"))
+            {
+                throw new Exception("SetNotEstimatedIntVal(). Not supported type of property.");
+            }
+            this[classPropName] = NotEstimatedIntYet;
+        }
+
+        public void SetNotEstimatedDecVal(string classPropName)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.String"))
+            {
+                throw new Exception("SetNotEstimatedDecVal(). Not supported type of property.");
+            }
+            this[classPropName] = NotEstimatedDecimalYet;
+        }
+
+        public void SetNotEstimatedBoolVal(string classPropName)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.String"))
+            {
+                throw new Exception("SetStrVal(). Not supported type of property.");
+            }
+            this[classPropName] = NotEstimatedBoolYet;
+        }
+        #endregion
+
+        /********************************************************************************************/
+
+        #region String Calculate Methods
         private string CalculateA1()
         {
             return "A1 String.";
@@ -256,6 +321,11 @@ namespace CacheProperties.Estimations
         private string CalculateA7() { return "A7 String."; }
         private string CalculateA8() { return "A8 String."; }
         private string CalculateA9() { return "A9 String."; }
+        #endregion
+
+        /********************************************************************************************/
+
+        #region Integer Calculate Methods
         private int CalculateB1() { return 1; }
         private int CalculateB2() { return 2; }
         private int CalculateB3()
@@ -297,11 +367,17 @@ namespace CacheProperties.Estimations
                 {
                     OutZeroValues.Add("OutB8");
                 }
+                SetIntVal("OutB7", b8MaxVal);
                 return b8MaxVal;
             }
             return 8;
         }
         private int CalculateB9() { return 9; }
+        #endregion
+
+        /********************************************************************************************/
+
+        #region Decimal Calculate Methods
         private decimal CalculateC1() { return 1.1m; }
         private decimal CalculateC2() { return 2.2m; }
         private decimal CalculateC3() { return 3.3m; }
@@ -311,6 +387,11 @@ namespace CacheProperties.Estimations
         private decimal CalculateC7() { return 7.7m; }
         private decimal CalculateC8() { return 8.8m; }
         private decimal CalculateC9() { return 9.9m; }
+        #endregion
+
+        /********************************************************************************************/
+
+        #region Bool Calculate Methods
         private bool CalculateD1() { return false; }
         private bool CalculateD2() { return true; }
         private bool CalculateD3() { return false; }
@@ -327,5 +408,8 @@ namespace CacheProperties.Estimations
         private bool CalculateD7() { return true; }
         private bool CalculateD8() { return false; }
         private bool CalculateD9() { return false; }
+        #endregion
+
+        /********************************************************************************************/
     }
 }
