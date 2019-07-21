@@ -1,31 +1,21 @@
 ﻿using CacheProperties.Estimations;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace CacheProperties.Helpers
 {
     public static class CacheEstimationsController
     {
-        //public delegate T GetValue<T>(out T property);
-        //public static string GetStrVal(this string property)
-        //{
-        //    if (property != FedEstimation.NotEstimatedYet)
-        //    {
-        //        property = Calculate
-        //    }
-
-        //    re
-        //}
-
-        public static bool isStrCalculated(this string property)
+        /// <summary>
+        /// Returns method value as an object.
+        /// </summary>
+        public static object GetMethodVal(object objRef, string methodName)
         {
-            if (property != FedEstimation.NotEstimatedStringYet)
-            {
-                return true;
-            }
-
-            return false;
+            Type type = objRef.GetType();
+            MethodInfo method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
+            return method.Invoke(objRef, null);
         }
     }
 }

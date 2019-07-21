@@ -69,12 +69,12 @@ namespace CacheProperties.Estimations
         /// <summary>
         /// Returns method value as an object.
         /// </summary>
-        private object GetMethodVal(string methodName)
-        {
-            Type type = this.GetType();
-            MethodInfo method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
-            return method.Invoke(this, null);
-        }
+        //private object GetMethodVal(string methodName)
+        //{
+        //    Type type = this.GetType();
+        //    MethodInfo method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
+        //    return method.Invoke(this, null);
+        //}
 
         public void CalculateAll()
         {
@@ -109,7 +109,7 @@ namespace CacheProperties.Estimations
             {
                 return val;
             }
-            string result = (string)GetMethodVal(classMethod);
+            string result = (string)CacheEstimationsController.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
         }
@@ -129,7 +129,7 @@ namespace CacheProperties.Estimations
                 result = (int)val;
                 return result;
             }
-            result = (int)GetMethodVal(classMethod);
+            result = (int)CacheEstimationsController.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
         }
@@ -149,7 +149,7 @@ namespace CacheProperties.Estimations
                 result = (decimal)val;
                 return result;
             }
-            result = (decimal)GetMethodVal(classMethod);
+            result = (decimal)CacheEstimationsController.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
         }
@@ -169,49 +169,55 @@ namespace CacheProperties.Estimations
                 result = (bool)val;
                 return result;
             }
-            result = (bool)GetMethodVal(classMethod);
+            result = (bool)CacheEstimationsController.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
         }
 
         private string CalculateA1()
         {
-            return "A1 Calculated.";
+            return "A1 String.";
         }
-        private string CalculateA2() { return "A2 Start 1"; }
-        private string CalculateA3() { return "Start"; }
-        private string CalculateA4() { return "Start"; }
-        private string CalculateA5() { return "Bash Majstora"; }
-        private string CalculateA6() { return "Start"; }
-        private string CalculateA7() { return "Start"; }
-        private string CalculateA8() { return "Start"; }
-        private string CalculateA9() { return "Start"; }
-        private int CalculateB1() { return 11; }
-        private int CalculateB2() { return 22; }
+        private string CalculateA2() { return "A2 String."; }
+        private string CalculateA3() { return "A3 String."; }
+        private string CalculateA4()
+        {
+            if (GetBoolVal("FedOutD2")) {
+                return GetStrVal("FedOutA2") + " " + GetStrVal("FedOutA3");
+            }
+            return "A4 String.";
+        }
+        private string CalculateA5() { return "A5 String."; }
+        private string CalculateA6() { return "A6 String."; }
+        private string CalculateA7() { return "A7 String."; }
+        private string CalculateA8() { return "A8 String."; }
+        private string CalculateA9() { return "A9 String."; }
+        private int CalculateB1() { return 1; }
+        private int CalculateB2() { return 2; }
         private int CalculateB3()
         {
             int result = GetIntVal("FedOutB1");
             result += GetIntVal("FedOutB2");
             return result;
         }
-
-        private int CalculateB4() { return 0; }
-        private int CalculateB5() { return 0; }
-        private int CalculateB6() { return 0; }
-        private int CalculateB7() { return 0; }
-        private int CalculateB8() { return 0; }
-        private int CalculateB9() { return 0; }
-        private decimal CalculateC1() { return 0; }
-        private decimal CalculateC2() { return 0; }
-        private decimal CalculateC3() { return 22; }
-        private decimal CalculateC4() { return 0; }
-        private decimal CalculateC5() { return 0; }
-        private decimal CalculateC6() { return 0; }
-        private decimal CalculateC7() { return 0; }
-        private decimal CalculateC8() { return 0; }
-        private decimal CalculateC9() { return 0; }
+        
+        private int CalculateB4() { return 4; }
+        private int CalculateB5() { return GetIntVal("FedOutB3") + GetIntVal("FedOutB4"); }
+        private int CalculateB6() { return 6; }
+        private int CalculateB7() { return 7; }
+        private int CalculateB8() { return 8; }
+        private int CalculateB9() { return 9; }
+        private decimal CalculateC1() { return 1.1m; }
+        private decimal CalculateC2() { return 2.2m; }
+        private decimal CalculateC3() { return 3.3m; }
+        private decimal CalculateC4() { return 4.4m; }
+        private decimal CalculateC5() { return 5.5m; }
+        private decimal CalculateC6() { return 6.6m; }
+        private decimal CalculateC7() { return 7.7m; }
+        private decimal CalculateC8() { return 8.8m; }
+        private decimal CalculateC9() { return 9.9m; }
         private bool CalculateD1() { return false; }
-        private bool CalculateD2() { return false; }
+        private bool CalculateD2() { return true; }
         private bool CalculateD3() { return false; }
         private bool CalculateD4() { return true; }
         private bool CalculateD5() { return false; }
