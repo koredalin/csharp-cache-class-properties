@@ -11,7 +11,7 @@ namespace CacheProperties.Estimations
         public static readonly string CalculateMethodPrefix = "Calculate";
         
         #region Not Estimated Type Constants
-        public static readonly string NotEstimatedStringYet = "NotEstimatedYet";
+        public static readonly string NotEstimatedStringYet = "NotEstimatedStringYet";
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
