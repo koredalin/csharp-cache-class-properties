@@ -55,7 +55,9 @@ namespace CacheProperties.Estimations
 
         public FedEstimation()
         {
+
         }
+
 
         /// <summary>
         /// Returns property value as an object.
@@ -192,6 +194,50 @@ namespace CacheProperties.Estimations
             return result;
         }
 
+        public void SetStrVal(string classPropName, string newValue)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.String"))
+            {
+                throw new Exception("SetStrVal(). Not supported type of property.");
+            }
+            this[classPropName] = newValue;
+        }
+
+        public void SetIntVal(string classPropName, string newValue)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.Int"))
+            {
+                throw new Exception("GetIntVal(). Not supported type of property.");
+            }
+            this[classPropName] = newValue;
+        }
+
+        public void SetDecVal(string classPropName, string newValue)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.Decimal"))
+            {
+                throw new Exception("GetDecimalVal(). Not supported type of property.");
+            }
+            this[classPropName] = newValue;
+        }
+
+        public void SetBoolVal(string classPropName, string newValue)
+        {
+            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            if (!propertyType.Contains("System.Bool"))
+            {
+                throw new Exception("GetBoolVal(). Not supported type of property.");
+            }
+            this[classPropName] = newValue;
+        }
+
         private string CalculateA1()
         {
             return "A1 String.";
@@ -216,6 +262,7 @@ namespace CacheProperties.Estimations
         {
             int result = GetIntVal("FedOutB1");
             result += GetIntVal("FedOutB2");
+            ZeroValues.Add("FedOutB3");
             return result;
         }
         private int CalculateB4()
@@ -241,7 +288,19 @@ namespace CacheProperties.Estimations
             ZeroValues.Add("FedOutB7");
             return 7;
         }
-        private int CalculateB8() { return 8; }
+        private int CalculateB8()
+        {
+            int b8MaxVal = 5;
+            if (GetIntVal("FedOutB7") > b8MaxVal)
+            {
+                if (ZeroValues.Contains("FedOutB7"))
+                {
+                    ZeroValues.Add("FedOutB8");
+                }
+                return b8MaxVal;
+            }
+            return 8;
+        }
         private int CalculateB9() { return 9; }
         private decimal CalculateC1() { return 1.1m; }
         private decimal CalculateC2() { return 2.2m; }
