@@ -28,5 +28,19 @@ namespace CacheProperties.Estimations
             string propertyType = objRef.GetType().GetProperty(propertyName).PropertyType.ToString();
             return propertyType;
         }
+
+        /// <summary>
+        /// Throws an exception if not appropriate property type used.
+        /// </summary>
+        /// <param name="propertyType"></param>
+        /// <param name="neededType"></param>
+        /// <param name="methodName"></param>
+        public static void ThrowWrongTypePropertyException(string propertyType, string neededType, string methodName)
+        {
+            if (!propertyType.Contains(neededType))
+            {
+                throw new Exception(methodName + "(). Not supported type of property.");
+            }
+        }
     }
 }

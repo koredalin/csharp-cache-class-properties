@@ -9,13 +9,18 @@ namespace CacheProperties.Estimations
     {
         public static readonly string OutputPrefix = "Out";
         public static readonly string CalculateMethodPrefix = "Calculate";
-        
+
         #region Not Estimated Type Constants
         public static readonly string NotEstimatedStringYet = "NotEstimatedStringYet";
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
         #endregion
+
+        private static readonly string StringTypeDef = "System.String";
+        private static readonly string IntTypeDef = "System.Int";
+        private static readonly string DecimalTypeDef = "System.Decimal";
+        private static readonly string BoolTypeDef = "System.Bool";
 
         /*******************************************************************************/
 
@@ -138,17 +143,14 @@ namespace CacheProperties.Estimations
         #region Get (Set value if not estimated) values with general types
         public string GetStrVal(string classPropName)
         {
-            string classMethod = GetCalcMethodName(classPropName);
-            var propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.String"))
-            {
-                throw new Exception("GetStrVal(). Not supported type of property.");
-            }
+            string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, StringTypeDef, "GetStrVal");
             string val = (string)this[classPropName];
             if (val != NotEstimatedStringYet)
             {
                 return val;
             }
+            string classMethod = GetCalcMethodName(classPropName);
             string result = (string)CachePropertiesHelper.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
@@ -156,12 +158,8 @@ namespace CacheProperties.Estimations
 
         public int GetIntVal(string classPropName)
         {
-            string classMethod = GetCalcMethodName(classPropName);
             string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.Int"))
-            {
-                throw new Exception("GetIntVal(). Not supported type of property.");
-            }
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, IntTypeDef, "GetIntVal");
             int? val = (int?)this[classPropName];
             int result;
             if (val != NotEstimatedIntYet)
@@ -169,6 +167,7 @@ namespace CacheProperties.Estimations
                 result = (int)val;
                 return result;
             }
+            string classMethod = GetCalcMethodName(classPropName);
             result = (int)CachePropertiesHelper.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
@@ -176,12 +175,8 @@ namespace CacheProperties.Estimations
 
         public decimal GetDecVal(string classPropName)
         {
-            string classMethod = GetCalcMethodName(classPropName);
             string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.Decimal"))
-            {
-                throw new Exception("GetDecimalVal(). Not supported type of property.");
-            }
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, DecimalTypeDef, "GetDecVal");
             decimal? val = (decimal?)this[classPropName];
             decimal result;
             if (val != NotEstimatedDecimalYet)
@@ -189,6 +184,7 @@ namespace CacheProperties.Estimations
                 result = (decimal)val;
                 return result;
             }
+            string classMethod = GetCalcMethodName(classPropName);
             result = (decimal)CachePropertiesHelper.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
@@ -196,12 +192,8 @@ namespace CacheProperties.Estimations
 
         public bool GetBoolVal(string classPropName)
         {
-            string classMethod = GetCalcMethodName(classPropName);
             string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.Bool"))
-            {
-                throw new Exception("GetBoolVal(). Not supported type of property.");
-            }
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, BoolTypeDef, "GetBoolVal");
             bool? val = (bool?)this[classPropName];
             bool result;
             if (val != NotEstimatedBoolYet)
@@ -209,6 +201,7 @@ namespace CacheProperties.Estimations
                 result = (bool)val;
                 return result;
             }
+            string classMethod = GetCalcMethodName(classPropName);
             result = (bool)CachePropertiesHelper.GetMethodVal(this, classMethod);
             this[classPropName] = result;
             return result;
@@ -220,85 +213,62 @@ namespace CacheProperties.Estimations
         #region Set class properties values with general types
         private void SetStrVal(string classPropName, string newValue)
         {
-            var propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.String"))
-            {
-                throw new Exception("SetStrVal(). Not supported type of property.");
-            }
+            string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, StringTypeDef, "SetStringVal");
             this[classPropName] = newValue;
         }
 
         private void SetIntVal(string classPropName, int newValue)
         {
             string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.Int"))
-            {
-                throw new Exception("SetIntVal(). Not supported type of property.");
-            }
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, IntTypeDef, "SetIntVal");
             this[classPropName] = newValue;
         }
 
         private void SetDecVal(string classPropName, decimal newValue)
         {
             string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.Decimal"))
-            {
-                throw new Exception("SetDecimalVal(). Not supported type of property.");
-            }
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, DecimalTypeDef, "SetDecVal");
             this[classPropName] = newValue;
         }
 
         private void SetBoolVal(string classPropName, bool newValue)
         {
             string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.Bool"))
-            {
-                throw new Exception("SetBoolVal(). Not supported type of property.");
-            }
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, BoolTypeDef, "SetBoolVal");
             this[classPropName] = newValue;
         }
         #endregion
+
 
         /********************************************************************************************/
 
         #region Set Not Estimated values with general types
         private void SetNotEstimatedStrVal(string classPropName)
         {
-            var propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.String"))
-            {
-                throw new Exception("SetNotEstimatedStrVal(). Not supported type of property.");
-            }
+            string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, StringTypeDef, "SetNotEstimatedStrVal");
             this[classPropName] = NotEstimatedStringYet;
         }
 
         private void SetNotEstimatedIntVal(string classPropName)
         {
-            var propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.String"))
-            {
-                throw new Exception("SetNotEstimatedIntVal(). Not supported type of property.");
-            }
+            string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, IntTypeDef, "SetNotEstimatedIntVal");
             this[classPropName] = NotEstimatedIntYet;
         }
 
         private void SetNotEstimatedDecVal(string classPropName)
         {
-            var propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.String"))
-            {
-                throw new Exception("SetNotEstimatedDecVal(). Not supported type of property.");
-            }
+            string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, DecimalTypeDef, "SetNotEstimatedDecVal");
             this[classPropName] = NotEstimatedDecimalYet;
         }
 
         private void SetNotEstimatedBoolVal(string classPropName)
         {
-            var propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
-            if (!propertyType.Contains("System.String"))
-            {
-                throw new Exception("SetNotEstimatedBoolVal(). Not supported type of property.");
-            }
+            string propertyType = CachePropertiesHelper.GetPropertyType(this, classPropName);
+            CachePropertiesHelper.ThrowWrongTypePropertyException(propertyType, BoolTypeDef, "SetNotEstimatedBoolVal");
             this[classPropName] = NotEstimatedBoolYet;
         }
         #endregion
