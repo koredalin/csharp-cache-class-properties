@@ -10,14 +10,13 @@ namespace CacheProperties
         static void Main(string[] args)
         {
             FedEstimation feObj = new FedEstimation();
-            //feObj.SetStrVal("FedOutA2", "A2 Calculated twice.");
             feObj.CalculateAll();
             feObj.ClearNotZeroValues();
 
             string fedEstimationsJson = JsonConvert.SerializeObject(feObj,
                 Formatting.Indented,
                 new JsonConverter[] { new StringEnumConverter() });
-            string fedEstimationsZeroPropertiesValuesJson = JsonConvert.SerializeObject(FedEstimation.ZeroValues,
+            string fedEstimationsZeroPropertiesValuesJson = JsonConvert.SerializeObject(FedEstimation.OutZeroValues,
                 Formatting.Indented,
                 new JsonConverter[] { new StringEnumConverter() });
 

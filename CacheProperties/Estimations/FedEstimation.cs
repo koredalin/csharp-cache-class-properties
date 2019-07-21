@@ -13,44 +13,44 @@ namespace CacheProperties.Estimations
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
 
-        public static List<string> ZeroValues = new List<string>();
+        public static List<string> OutZeroValues = new List<string>();
 
-        public string FedOutA1 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA2 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA3 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA4 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA5 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA6 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA7 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA8 { get; private set; } = NotEstimatedStringYet;
-        public string FedOutA9 { get; private set; } = NotEstimatedStringYet;
-        public int? FedOutB1 { get; private set; }
-        public int? FedOutB2 { get; private set; }
-        public int? FedOutB3 { get; private set; }
-        public int? FedOutB4 { get; private set; }
-        public int? FedOutB5 { get; private set; }
-        public int? FedOutB6 { get; private set; }
-        public int? FedOutB7 { get; private set; }
-        public int? FedOutB8 { get; private set; }
-        public int? FedOutB9 { get; private set; }
-        public decimal? FedOutC1 { get; private set; }
-        public decimal? FedOutC2 { get; private set; }
-        public decimal? FedOutC3 { get; private set; }
-        public decimal? FedOutC4 { get; private set; }
-        public decimal? FedOutC5 { get; private set; }
-        public decimal? FedOutC6 { get; private set; }
-        public decimal? FedOutC7 { get; private set; }
-        public decimal? FedOutC8 { get; private set; }
-        public decimal? FedOutC9 { get; private set; }
-        public bool? FedOutD1 { get; private set; }
-        public bool? FedOutD2 { get; private set; }
-        public bool? FedOutD3 { get; private set; }
-        public bool? FedOutD4 { get; private set; }
-        public bool? FedOutD5 { get; private set; }
-        public bool? FedOutD6 { get; private set; }
-        public bool? FedOutD7 { get; private set; }
-        public bool? FedOutD8 { get; private set; }
-        public bool? FedOutD9 { get; private set; }
+        public string OutA1 { get; private set; } = NotEstimatedStringYet;
+        public string OutA2 { get; private set; } = NotEstimatedStringYet;
+        public string OutA3 { get; private set; } = NotEstimatedStringYet;
+        public string OutA4 { get; private set; } = NotEstimatedStringYet;
+        public string OutA5 { get; private set; } = NotEstimatedStringYet;
+        public string OutA6 { get; private set; } = NotEstimatedStringYet;
+        public string OutA7 { get; private set; } = NotEstimatedStringYet;
+        public string OutA8 { get; private set; } = NotEstimatedStringYet;
+        public string OutA9 { get; private set; } = NotEstimatedStringYet;
+        public int? OutB1 { get; private set; }
+        public int? OutB2 { get; private set; }
+        public int? OutB3 { get; private set; }
+        public int? OutB4 { get; private set; }
+        public int? OutB5 { get; private set; }
+        public int? OutB6 { get; private set; }
+        public int? OutB7 { get; private set; }
+        public int? OutB8 { get; private set; }
+        public int? OutB9 { get; private set; }
+        public decimal? OutC1 { get; private set; }
+        public decimal? OutC2 { get; private set; }
+        public decimal? OutC3 { get; private set; }
+        public decimal? OutC4 { get; private set; }
+        public decimal? OutC5 { get; private set; }
+        public decimal? OutC6 { get; private set; }
+        public decimal? OutC7 { get; private set; }
+        public decimal? OutC8 { get; private set; }
+        public decimal? OutC9 { get; private set; }
+        public bool? OutD1 { get; private set; }
+        public bool? OutD2 { get; private set; }
+        public bool? OutD3 { get; private set; }
+        public bool? OutD4 { get; private set; }
+        public bool? OutD5 { get; private set; }
+        public bool? OutD6 { get; private set; }
+        public bool? OutD7 { get; private set; }
+        public bool? OutD8 { get; private set; }
+        public bool? OutD9 { get; private set; }
 
 
         public FedEstimation()
@@ -104,21 +104,21 @@ namespace CacheProperties.Estimations
             {
                 if (GetIntVal(classPropName) != 0)
                 {
-                    ZeroValues.Remove(classPropName);
+                    OutZeroValues.Remove(classPropName);
                 }
             };
             foreach (string classPropName in FedProperties.AllProperties["DecimalProperties"])
             {
                 if (GetDecVal(classPropName) != 0)
                 {
-                    ZeroValues.Remove(classPropName);
+                    OutZeroValues.Remove(classPropName);
                 }
             };
         }
 
         public string GetStrVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
@@ -136,7 +136,7 @@ namespace CacheProperties.Estimations
 
         public int GetIntVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Int"))
             {
@@ -156,7 +156,7 @@ namespace CacheProperties.Estimations
 
         public decimal GetDecVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Decimal"))
             {
@@ -176,7 +176,7 @@ namespace CacheProperties.Estimations
 
         public bool GetBoolVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Bool"))
             {
@@ -196,7 +196,7 @@ namespace CacheProperties.Estimations
 
         public void SetStrVal(string classPropName, string newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
@@ -207,7 +207,7 @@ namespace CacheProperties.Estimations
 
         public void SetIntVal(string classPropName, string newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Int"))
             {
@@ -218,7 +218,7 @@ namespace CacheProperties.Estimations
 
         public void SetDecVal(string classPropName, string newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Decimal"))
             {
@@ -229,7 +229,7 @@ namespace CacheProperties.Estimations
 
         public void SetBoolVal(string classPropName, string newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("FedOut", "");
+            string classMethod = "Calculate" + classPropName.Replace("Out", "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Bool"))
             {
@@ -246,8 +246,8 @@ namespace CacheProperties.Estimations
         private string CalculateA3() { return "A3 String."; }
         private string CalculateA4()
         {
-            if (GetBoolVal("FedOutD2")) {
-                return GetStrVal("FedOutA2") + " " + GetStrVal("FedOutA3");
+            if (GetBoolVal("OutD2")) {
+                return GetStrVal("OutA2") + " " + GetStrVal("OutA3");
             }
             return "A4 String.";
         }
@@ -260,42 +260,42 @@ namespace CacheProperties.Estimations
         private int CalculateB2() { return 2; }
         private int CalculateB3()
         {
-            int result = GetIntVal("FedOutB1");
-            result += GetIntVal("FedOutB2");
-            ZeroValues.Add("FedOutB3");
+            int result = GetIntVal("OutB1");
+            result += GetIntVal("OutB2");
+            OutZeroValues.Add("OutB3");
             return result;
         }
         private int CalculateB4()
         {
-            ZeroValues.Add("FedOutB4");
+            OutZeroValues.Add("OutB4");
             return 0;
         }
         private int CalculateB5()
         {
-            return GetIntVal("FedOutB3") + GetIntVal("FedOutB4");
+            return GetIntVal("OutB3") + GetIntVal("OutB4");
         }
         private int CalculateB6()
         {
-            int result = GetIntVal("FedOutB4");
+            int result = GetIntVal("OutB4");
             if (result == 0)
             {
-                ZeroValues.Add("FedOutB6");
+                OutZeroValues.Add("OutB6");
             }
             return result;
         }
         private int CalculateB7()
         {
-            ZeroValues.Add("FedOutB7");
+            OutZeroValues.Add("OutB7");
             return 7;
         }
         private int CalculateB8()
         {
             int b8MaxVal = 5;
-            if (GetIntVal("FedOutB7") > b8MaxVal)
+            if (GetIntVal("OutB7") > b8MaxVal)
             {
-                if (ZeroValues.Contains("FedOutB7"))
+                if (OutZeroValues.Contains("OutB7"))
                 {
-                    ZeroValues.Add("FedOutB8");
+                    OutZeroValues.Add("OutB8");
                 }
                 return b8MaxVal;
             }
@@ -318,7 +318,7 @@ namespace CacheProperties.Estimations
         private bool CalculateD5() { return false; }
         private bool CalculateD6()
         {
-            if (GetIntVal("FedOutB4") + GetDecVal("FedOutC4") > 66)
+            if (GetIntVal("OutB4") + GetDecVal("OutC4") > 66)
             {
                 return true;
             }
