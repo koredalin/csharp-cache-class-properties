@@ -130,7 +130,7 @@ namespace CacheProperties.Estimations
         public string GetStrVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            var propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.String"))
             {
                 throw new Exception("GetStrVal(). Not supported type of property.");
@@ -148,7 +148,7 @@ namespace CacheProperties.Estimations
         public int GetIntVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            string propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.Int"))
             {
                 throw new Exception("GetIntVal(). Not supported type of property.");
@@ -168,7 +168,7 @@ namespace CacheProperties.Estimations
         public decimal GetDecVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            string propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.Decimal"))
             {
                 throw new Exception("GetDecimalVal(). Not supported type of property.");
@@ -188,7 +188,7 @@ namespace CacheProperties.Estimations
         public bool GetBoolVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            string propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.Bool"))
             {
                 throw new Exception("GetBoolVal(). Not supported type of property.");
@@ -212,7 +212,7 @@ namespace CacheProperties.Estimations
         private void SetStrVal(string classPropName, string newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            var propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.String"))
             {
                 throw new Exception("SetStrVal(). Not supported type of property.");
@@ -223,7 +223,7 @@ namespace CacheProperties.Estimations
         private void SetIntVal(string classPropName, int newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            string propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.Int"))
             {
                 throw new Exception("SetIntVal(). Not supported type of property.");
@@ -234,7 +234,7 @@ namespace CacheProperties.Estimations
         private void SetDecVal(string classPropName, decimal newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            string propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.Decimal"))
             {
                 throw new Exception("SetDecimalVal(). Not supported type of property.");
@@ -245,7 +245,7 @@ namespace CacheProperties.Estimations
         private void SetBoolVal(string classPropName, bool newValue)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            string propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.Bool"))
             {
                 throw new Exception("SetBoolVal(). Not supported type of property.");
@@ -260,7 +260,7 @@ namespace CacheProperties.Estimations
         private void SetNotEstimatedStrVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            var propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.String"))
             {
                 throw new Exception("SetNotEstimatedStrVal(). Not supported type of property.");
@@ -271,7 +271,7 @@ namespace CacheProperties.Estimations
         private void SetNotEstimatedIntVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            var propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.String"))
             {
                 throw new Exception("SetNotEstimatedIntVal(). Not supported type of property.");
@@ -282,7 +282,7 @@ namespace CacheProperties.Estimations
         private void SetNotEstimatedDecVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            var propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.String"))
             {
                 throw new Exception("SetNotEstimatedDecVal(). Not supported type of property.");
@@ -293,7 +293,7 @@ namespace CacheProperties.Estimations
         private void SetNotEstimatedBoolVal(string classPropName)
         {
             string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
-            var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
+            var propertyType = CacheEstimationsController.GetPropertyType(this, classPropName);
             if (!propertyType.Contains("System.String"))
             {
                 throw new Exception("SetNotEstimatedBoolVal(). Not supported type of property.");
