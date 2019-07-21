@@ -8,8 +8,9 @@ namespace CacheProperties.Estimations
 {
     public class FedEstimation
     {
-        #region Not Estimated Type Constants
         public static readonly string OutputPrefix = "Out";
+        
+        #region Not Estimated Type Constants
         public static readonly string NotEstimatedStringYet = "NotEstimatedYet";
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
