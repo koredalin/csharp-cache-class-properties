@@ -9,14 +9,14 @@ namespace CacheProperties
     {
         static void Main(string[] args)
         {
-            FedEstimation feObj = new FedEstimation();
+            Calculator feObj = new Calculator();
             feObj.CalculateAll();
             feObj.ClearOutputNotZeros();
 
             string fedEstimationsJson = JsonConvert.SerializeObject(feObj,
                 Formatting.Indented,
                 new JsonConverter[] { new StringEnumConverter() });
-            string fedEstimationsZeroPropertiesValuesJson = JsonConvert.SerializeObject(FedEstimation.OutZeroValues,
+            string fedEstimationsZeroPropertiesValuesJson = JsonConvert.SerializeObject(Calculator.OutZeroValues,
                 Formatting.Indented,
                 new JsonConverter[] { new StringEnumConverter() });
 

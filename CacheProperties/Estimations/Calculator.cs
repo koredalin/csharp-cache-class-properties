@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CacheProperties.Estimations
 {
-    public class FedEstimation
+    public class Calculator
     {
         public static readonly string OutputPrefix = "Out";
         public static readonly string CalculateMethodPrefix = "Calculate";
@@ -69,7 +69,7 @@ namespace CacheProperties.Estimations
         /// <summary>
         /// Class Constructor
         /// </summary>
-        public FedEstimation()
+        public Calculator()
         {
 
         }
