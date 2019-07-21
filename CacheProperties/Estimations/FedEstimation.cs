@@ -202,7 +202,10 @@ namespace CacheProperties.Estimations
         }
         
         private int CalculateB4() { return 4; }
-        private int CalculateB5() { return GetIntVal("FedOutB3") + GetIntVal("FedOutB4"); }
+        private int CalculateB5()
+        {
+            return GetIntVal("FedOutB3") + GetIntVal("FedOutB4");
+        }
         private int CalculateB6() { return 6; }
         private int CalculateB7() { return 7; }
         private int CalculateB8() { return 8; }
@@ -221,7 +224,14 @@ namespace CacheProperties.Estimations
         private bool CalculateD3() { return false; }
         private bool CalculateD4() { return true; }
         private bool CalculateD5() { return false; }
-        private bool CalculateD6() { return false; }
+        private bool CalculateD6()
+        {
+            if (GetIntVal("FedOutB4") + GetDecVal("FedOutC4") > 66)
+            {
+                return true;
+            }
+            return false;
+        }
         private bool CalculateD7() { return true; }
         private bool CalculateD8() { return false; }
         private bool CalculateD9() { return false; }
