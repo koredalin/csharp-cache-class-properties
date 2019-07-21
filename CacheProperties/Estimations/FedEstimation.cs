@@ -9,6 +9,7 @@ namespace CacheProperties.Estimations
     public class FedEstimation
     {
         #region Not Estimated Type Constants
+        public static readonly string OutputPrefix = "Out";
         public static readonly string NotEstimatedStringYet = "NotEstimatedYet";
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
@@ -127,7 +128,7 @@ namespace CacheProperties.Estimations
         #region Get (Set value if not estimated) values with general types
         public string GetStrVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
@@ -145,7 +146,7 @@ namespace CacheProperties.Estimations
 
         public int GetIntVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Int"))
             {
@@ -165,7 +166,7 @@ namespace CacheProperties.Estimations
 
         public decimal GetDecVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Decimal"))
             {
@@ -185,7 +186,7 @@ namespace CacheProperties.Estimations
 
         public bool GetBoolVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Bool"))
             {
@@ -209,7 +210,7 @@ namespace CacheProperties.Estimations
         #region Set class properties values with general types
         private void SetStrVal(string classPropName, string newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
@@ -220,7 +221,7 @@ namespace CacheProperties.Estimations
 
         private void SetIntVal(string classPropName, int newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Int"))
             {
@@ -231,7 +232,7 @@ namespace CacheProperties.Estimations
 
         private void SetDecVal(string classPropName, decimal newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Decimal"))
             {
@@ -242,7 +243,7 @@ namespace CacheProperties.Estimations
 
         private void SetBoolVal(string classPropName, bool newValue)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             string propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.Bool"))
             {
@@ -257,7 +258,7 @@ namespace CacheProperties.Estimations
         #region Set Not Estimated values with general types
         private void SetNotEstimatedStrVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
@@ -268,7 +269,7 @@ namespace CacheProperties.Estimations
 
         private void SetNotEstimatedIntVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
@@ -279,7 +280,7 @@ namespace CacheProperties.Estimations
 
         private void SetNotEstimatedDecVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
@@ -290,7 +291,7 @@ namespace CacheProperties.Estimations
 
         private void SetNotEstimatedBoolVal(string classPropName)
         {
-            string classMethod = "Calculate" + classPropName.Replace("Out", "");
+            string classMethod = "Calculate" + classPropName.Replace(OutputPrefix, "");
             var propertyType = this.GetType().GetProperty(classPropName).PropertyType.ToString();
             if (!propertyType.Contains("System.String"))
             {
