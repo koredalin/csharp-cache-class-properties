@@ -148,19 +148,19 @@ namespace CacheProperties.Estimations
         {
             foreach (StrProperties classProp in (StrProperties[]) Enum.GetValues(typeof(StrProperties)))
             {
-                GetStrVal(Enum.GetName(typeof(StrProperties), classProp));
+                GetStrVal(classProp);
             };
             foreach (IntProperties classProp in (IntProperties[])Enum.GetValues(typeof(IntProperties)))
             {
-                GetIntVal(Enum.GetName(typeof(IntProperties), classProp));
+                GetIntVal(classProp);
             };
             foreach (DecimalProperties classProp in (DecimalProperties[])Enum.GetValues(typeof(DecimalProperties)))
             {
-                GetDecimalVal(Enum.GetName(typeof(DecimalProperties), classProp));
+                GetDecimalVal(classProp);
             };
             foreach (BoolProperties classProp in (BoolProperties[])Enum.GetValues(typeof(BoolProperties)))
             {
-                GetBoolVal(Enum.GetName(typeof(BoolProperties), classProp));
+                GetBoolVal(classProp);
             };
         }
 
@@ -170,21 +170,18 @@ namespace CacheProperties.Estimations
         /// </summary>
         public void ClearOutputNotZeros()
         {
-            string classPropName;
             foreach (IntProperties classProp in (IntProperties[])Enum.GetValues(typeof(IntProperties)))
             {
-                classPropName = Enum.GetName(typeof(IntProperties), classProp);
-                if (GetIntVal(classPropName) != 0)
+                if (GetIntVal(classProp) != 0)
                 {
-                    OutZeroValues.Remove(classPropName);
+                    OutZeroValues.Remove(GetIntPropName(classProp));
                 }
             };
             foreach (DecimalProperties classProp in (DecimalProperties[])Enum.GetValues(typeof(DecimalProperties)))
             {
-                classPropName = Enum.GetName(typeof(DecimalProperties), classProp);
-                if (GetDecimalVal(classPropName) != 0)
+                if (GetDecimalVal(classProp) != 0)
                 {
-                    OutZeroValues.Remove(classPropName);
+                    OutZeroValues.Remove(GetDecimalPropName(classProp));
                 }
             };
         }
@@ -193,8 +190,9 @@ namespace CacheProperties.Estimations
         /********************************************************************************************/
 
         #region Get (Set value if not estimated) values with general types
-        public string GetStrVal(string classPropName)
+        public string GetStrVal(StrProperties strEnumId)
         {
+            string classPropName = GetStrPropName(strEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, StringTypeDef, "GetStrVal");
             string val = (string)this[classPropName];
@@ -208,8 +206,9 @@ namespace CacheProperties.Estimations
             return result;
         }
 
-        public int GetIntVal(string classPropName)
+        public int GetIntVal(IntProperties intEnumId)
         {
+            string classPropName = GetIntPropName(intEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, IntTypeDef, "GetIntVal");
             int? val = (int?)this[classPropName];
@@ -225,8 +224,9 @@ namespace CacheProperties.Estimations
             return result;
         }
 
-        public decimal GetDecimalVal(string classPropName)
+        public decimal GetDecimalVal(DecimalProperties decimalEnumId)
         {
+            string classPropName = GetDecimalPropName(decimalEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, DecimalTypeDef, "GetDecVal");
             decimal? val = (decimal?)this[classPropName];
@@ -242,8 +242,9 @@ namespace CacheProperties.Estimations
             return result;
         }
 
-        public bool GetBoolVal(string classPropName)
+        public bool GetBoolVal(BoolProperties boolEnumId)
         {
+            string classPropName = GetBoolPropName(boolEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, BoolTypeDef, "GetBoolVal");
             bool? val = (bool?)this[classPropName];
@@ -263,29 +264,33 @@ namespace CacheProperties.Estimations
         /********************************************************************************************/
 
         #region Set class properties values with general types
-        private void SetStrVal(string classPropName, string newValue)
+        private void SetStrVal(StrProperties strEnumId, string newValue)
         {
+            string classPropName = GetStrPropName(strEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, StringTypeDef, "SetStringVal");
             this[classPropName] = newValue;
         }
 
-        private void SetIntVal(string classPropName, int newValue)
+        private void SetIntVal(IntProperties intEnumId, int newValue)
         {
+            string classPropName = GetIntPropName(intEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, IntTypeDef, "SetIntVal");
             this[classPropName] = newValue;
         }
 
-        private void SetDecVal(string classPropName, decimal newValue)
+        private void SetDecimalVal(DecimalProperties decimalEnumId, decimal newValue)
         {
+            string classPropName = GetDecimalPropName(decimalEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, DecimalTypeDef, "SetDecVal");
             this[classPropName] = newValue;
         }
 
-        private void SetBoolVal(string classPropName, bool newValue)
+        private void SetBoolVal(BoolProperties boolEnumId, bool newValue)
         {
+            string classPropName = GetBoolPropName(boolEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, BoolTypeDef, "SetBoolVal");
             this[classPropName] = newValue;
@@ -296,29 +301,33 @@ namespace CacheProperties.Estimations
         /********************************************************************************************/
 
         #region Set Not Estimated values with general types
-        private void SetNotEstimatedStrVal(string classPropName)
+        private void SetNotEstimatedStrVal(StrProperties strEnumId)
         {
+            string classPropName = GetStrPropName(strEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, StringTypeDef, "SetNotEstimatedStrVal");
             this[classPropName] = NotEstimatedStringYet;
         }
 
-        private void SetNotEstimatedIntVal(string classPropName)
+        private void SetNotEstimatedIntVal(IntProperties intEnumId)
         {
+            string classPropName = GetIntPropName(intEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, IntTypeDef, "SetNotEstimatedIntVal");
             this[classPropName] = NotEstimatedIntYet;
         }
 
-        private void SetNotEstimatedDecVal(string classPropName)
+        private void SetNotEstimatedDecVal(DecimalProperties decimalEnumId)
         {
+            string classPropName = GetDecimalPropName(decimalEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, DecimalTypeDef, "SetNotEstimatedDecVal");
             this[classPropName] = NotEstimatedDecimalYet;
         }
 
-        private void SetNotEstimatedBoolVal(string classPropName)
+        private void SetNotEstimatedBoolVal(BoolProperties boolEnumId)
         {
+            string classPropName = GetBoolPropName(boolEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, BoolTypeDef, "SetNotEstimatedBoolVal");
             this[classPropName] = NotEstimatedBoolYet;
@@ -336,9 +345,9 @@ namespace CacheProperties.Estimations
         private string CalculateA3() { return "A3 String."; }
         private string CalculateA4()
         {
-            if (GetBoolVal(GetBoolPropName(BoolProperties.OutD2))) {
-                return GetStrVal(GetStrPropName(StrProperties.OutA2)) + " "
-                    + GetStrVal(GetStrPropName(StrProperties.OutA3));
+            if (GetBoolVal(BoolProperties.OutD2)) {
+                return GetStrVal(StrProperties.OutA2) + " "
+                    + GetStrVal(StrProperties.OutA3);
             }
             return "A4 String.";
         }
@@ -356,8 +365,8 @@ namespace CacheProperties.Estimations
         private int CalculateB2() { return 2; }
         private int CalculateB3()
         {
-            int result = GetIntVal(GetIntPropName(IntProperties.OutB1));
-            result += GetIntVal(GetIntPropName(IntProperties.OutB2));
+            int result = GetIntVal(IntProperties.OutB1);
+            result += GetIntVal(IntProperties.OutB2);
             OutZeroValues.Add(GetIntPropName(IntProperties.OutB3));
             return result;
         }
@@ -368,11 +377,11 @@ namespace CacheProperties.Estimations
         }
         private int CalculateB5()
         {
-            return GetIntVal(GetIntPropName(IntProperties.OutB3)) + GetIntVal(GetIntPropName(IntProperties.OutB4));
+            return GetIntVal(IntProperties.OutB3) + GetIntVal(IntProperties.OutB4);
         }
         private int CalculateB6()
         {
-            int result = GetIntVal(GetIntPropName(IntProperties.OutB4));
+            int result = GetIntVal(IntProperties.OutB4);
             if (result == 0)
             {
                 OutZeroValues.Add(GetIntPropName(IntProperties.OutB6));
@@ -387,13 +396,13 @@ namespace CacheProperties.Estimations
         private int CalculateB8()
         {
             int b8MaxVal = 5;
-            if (GetIntVal(GetIntPropName(IntProperties.OutB7)) > b8MaxVal)
+            if (GetIntVal(IntProperties.OutB7) > b8MaxVal)
             {
                 if (OutZeroValues.Contains(GetIntPropName(IntProperties.OutB7)))
                 {
                     OutZeroValues.Add(GetIntPropName(IntProperties.OutB8));
                 }
-                SetIntVal(GetIntPropName(IntProperties.OutB7), b8MaxVal);
+                SetIntVal(IntProperties.OutB7, b8MaxVal);
                 return b8MaxVal;
             }
             return 8;
@@ -425,7 +434,7 @@ namespace CacheProperties.Estimations
         private bool CalculateD5() { return false; }
         private bool CalculateD6()
         {
-            if (GetIntVal(GetIntPropName(IntProperties.OutB4)) + GetDecimalVal(GetDecimalPropName(DecimalProperties.OutC4)) > 66)
+            if (GetIntVal(IntProperties.OutB4) + GetDecimalVal(DecimalProperties.OutC4) > 66)
             {
                 return true;
             }
