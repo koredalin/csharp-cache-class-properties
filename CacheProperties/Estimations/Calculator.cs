@@ -263,79 +263,6 @@ namespace CacheProperties.Estimations
 
         /********************************************************************************************/
 
-        #region Set class properties values with general types
-        private void SetStrVal(StrProperties strEnumId, string newValue)
-        {
-            string classPropName = GetStrPropName(strEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, StringTypeDef, "SetStringVal");
-            this[classPropName] = newValue;
-        }
-
-        private void SetIntVal(IntProperties intEnumId, int newValue)
-        {
-            string classPropName = GetIntPropName(intEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, IntTypeDef, "SetIntVal");
-            this[classPropName] = newValue;
-        }
-
-        private void SetDecimalVal(DecimalProperties decimalEnumId, decimal newValue)
-        {
-            string classPropName = GetDecimalPropName(decimalEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, DecimalTypeDef, "SetDecVal");
-            this[classPropName] = newValue;
-        }
-
-        private void SetBoolVal(BoolProperties boolEnumId, bool newValue)
-        {
-            string classPropName = GetBoolPropName(boolEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, BoolTypeDef, "SetBoolVal");
-            this[classPropName] = newValue;
-        }
-        #endregion
-
-
-        /********************************************************************************************/
-
-        #region Set Not Estimated values with general types
-        private void SetNotEstimatedStrVal(StrProperties strEnumId)
-        {
-            string classPropName = GetStrPropName(strEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, StringTypeDef, "SetNotEstimatedStrVal");
-            this[classPropName] = NotEstimatedStringYet;
-        }
-
-        private void SetNotEstimatedIntVal(IntProperties intEnumId)
-        {
-            string classPropName = GetIntPropName(intEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, IntTypeDef, "SetNotEstimatedIntVal");
-            this[classPropName] = NotEstimatedIntYet;
-        }
-
-        private void SetNotEstimatedDecVal(DecimalProperties decimalEnumId)
-        {
-            string classPropName = GetDecimalPropName(decimalEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, DecimalTypeDef, "SetNotEstimatedDecVal");
-            this[classPropName] = NotEstimatedDecimalYet;
-        }
-
-        private void SetNotEstimatedBoolVal(BoolProperties boolEnumId)
-        {
-            string classPropName = GetBoolPropName(boolEnumId);
-            string propertyType = GetPropertyType(classPropName);
-            ThrowWrongTypePropertyException(classPropName, propertyType, BoolTypeDef, "SetNotEstimatedBoolVal");
-            this[classPropName] = NotEstimatedBoolYet;
-        }
-        #endregion
-
-        /********************************************************************************************/
-
         #region String Calculate Methods
         private string CalculateA1()
         {
@@ -402,7 +329,7 @@ namespace CacheProperties.Estimations
                 {
                     OutZeroValues.Add(GetIntPropName(IntProperties.OutB8));
                 }
-                SetIntVal(IntProperties.OutB7, b8MaxVal);
+                OutB7 = b8MaxVal;
                 return b8MaxVal;
             }
             return 8;
