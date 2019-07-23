@@ -7,7 +7,7 @@ namespace CacheProperties.Estimations
 {
     public class Calculator
     {
-        public static readonly string OutputPrefix = "Out";
+        public static readonly string OutputPropertyPrefix = "Out";
         public static readonly string CalculateMethodPrefix = "Calculate";
 
         #region Not Estimated Type Constants
@@ -99,7 +99,7 @@ namespace CacheProperties.Estimations
 
         private string GetCalcMethodName(string outputPropertyName)
         {
-            return CalculateMethodPrefix + outputPropertyName.Replace(OutputPrefix, "");
+            return CalculateMethodPrefix + outputPropertyName;
         }
 
         /// <summary>
@@ -125,19 +125,19 @@ namespace CacheProperties.Estimations
 
         private string GetStrPropName(StrProperties property)
         {
-            return Enum.GetName(typeof(StrProperties), property);
+            return OutputPropertyPrefix + Enum.GetName(typeof(StrProperties), property);
         }
         private string GetIntPropName(IntProperties property)
         {
-            return Enum.GetName(typeof(IntProperties), property);
+            return OutputPropertyPrefix + Enum.GetName(typeof(IntProperties), property);
         }
         private string GetDecimalPropName(DecimalProperties property)
         {
-            return Enum.GetName(typeof(DecimalProperties), property);
+            return OutputPropertyPrefix + Enum.GetName(typeof(DecimalProperties), property);
         }
         private string GetBoolPropName(BoolProperties property)
         {
-            return Enum.GetName(typeof(BoolProperties), property);
+            return OutputPropertyPrefix + Enum.GetName(typeof(BoolProperties), property);
         }
         #endregion
 
@@ -200,7 +200,7 @@ namespace CacheProperties.Estimations
             {
                 return val;
             }
-            string classMethod = GetCalcMethodName(classPropName);
+            string classMethod = GetCalcMethodName(Enum.GetName(typeof(StrProperties), strEnumId));
             string result = (string)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
@@ -218,7 +218,7 @@ namespace CacheProperties.Estimations
                 result = (int)val;
                 return result;
             }
-            string classMethod = GetCalcMethodName(classPropName);
+            string classMethod = GetCalcMethodName(Enum.GetName(typeof(IntProperties), intEnumId));
             result = (int)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
@@ -236,7 +236,7 @@ namespace CacheProperties.Estimations
                 result = (decimal)val;
                 return result;
             }
-            string classMethod = GetCalcMethodName(classPropName);
+            string classMethod = GetCalcMethodName(Enum.GetName(typeof(DecimalProperties), decimalEnumId));
             result = (decimal)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
@@ -254,7 +254,7 @@ namespace CacheProperties.Estimations
                 result = (bool)val;
                 return result;
             }
-            string classMethod = GetCalcMethodName(classPropName);
+            string classMethod = GetCalcMethodName(Enum.GetName(typeof(BoolProperties), boolEnumId));
             result = (bool)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
@@ -272,9 +272,9 @@ namespace CacheProperties.Estimations
         private string CalculateA3() { return "A3 String."; }
         private string CalculateA4()
         {
-            if (GetBoolVal(BoolProperties.OutD2)) {
-                return GetStrVal(StrProperties.OutA2) + " "
-                    + GetStrVal(StrProperties.OutA3);
+            if (GetBoolVal(BoolProperties.D2)) {
+                return GetStrVal(StrProperties.A2) + " "
+                    + GetStrVal(StrProperties.A3);
             }
             return "A4 String.";
         }
@@ -292,42 +292,42 @@ namespace CacheProperties.Estimations
         private int CalculateB2() { return 2; }
         private int CalculateB3()
         {
-            int result = GetIntVal(IntProperties.OutB1);
-            result += GetIntVal(IntProperties.OutB2);
-            OutZeroValues.Add(GetIntPropName(IntProperties.OutB3));
+            int result = GetIntVal(IntProperties.B1);
+            result += GetIntVal(IntProperties.B2);
+            OutZeroValues.Add(GetIntPropName(IntProperties.B3));
             return result;
         }
         private int CalculateB4()
         {
-            OutZeroValues.Add(GetIntPropName(IntProperties.OutB4));
+            OutZeroValues.Add(GetIntPropName(IntProperties.B4));
             return 0;
         }
         private int CalculateB5()
         {
-            return GetIntVal(IntProperties.OutB3) + GetIntVal(IntProperties.OutB4);
+            return GetIntVal(IntProperties.B3) + GetIntVal(IntProperties.B4);
         }
         private int CalculateB6()
         {
-            int result = GetIntVal(IntProperties.OutB4);
+            int result = GetIntVal(IntProperties.B4);
             if (result == 0)
             {
-                OutZeroValues.Add(GetIntPropName(IntProperties.OutB6));
+                OutZeroValues.Add(GetIntPropName(IntProperties.B6));
             }
             return result;
         }
         private int CalculateB7()
         {
-            OutZeroValues.Add(GetIntPropName(IntProperties.OutB7));
+            OutZeroValues.Add(GetIntPropName(IntProperties.B7));
             return 7;
         }
         private int CalculateB8()
         {
             int b8MaxVal = 5;
-            if (GetIntVal(IntProperties.OutB7) > b8MaxVal)
+            if (GetIntVal(IntProperties.B7) > b8MaxVal)
             {
-                if (OutZeroValues.Contains(GetIntPropName(IntProperties.OutB7)))
+                if (OutZeroValues.Contains(GetIntPropName(IntProperties.B7)))
                 {
-                    OutZeroValues.Add(GetIntPropName(IntProperties.OutB8));
+                    OutZeroValues.Add(GetIntPropName(IntProperties.B8));
                 }
                 OutB7 = b8MaxVal;
                 return b8MaxVal;
@@ -361,7 +361,7 @@ namespace CacheProperties.Estimations
         private bool CalculateD5() { return false; }
         private bool CalculateD6()
         {
-            if (GetIntVal(IntProperties.OutB4) + GetDecimalVal(DecimalProperties.OutC4) > 66)
+            if (GetIntVal(IntProperties.B4) + GetDecimalVal(DecimalProperties.C4) > 66)
             {
                 return true;
             }
