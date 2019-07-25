@@ -208,54 +208,48 @@ namespace CacheProperties.Estimations
             return result;
         }
 
-        public int GetIntVal(IntProperties intEnumId)
+        public int? GetIntVal(IntProperties intEnumId)
         {
             string classPropName = GetIntPropName(intEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, IntTypeDef, "GetIntVal");
             int? val = (int?)this[classPropName];
-            int result;
             if (val != NotEstimatedIntYet)
             {
-                result = (int)val;
-                return result;
+                return val;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(IntProperties), intEnumId));
-            result = (int)GetMethodVal(classMethod);
+            int? result = (int?)GetMethodVal(classMethod);
             return result;
         }
 
-        public decimal GetDecimalVal(DecimalProperties decimalEnumId)
+        public decimal? GetDecimalVal(DecimalProperties decimalEnumId)
         {
             string classPropName = GetDecimalPropName(decimalEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, DecimalTypeDef, "GetDecVal");
             decimal? val = (decimal?)this[classPropName];
-            decimal result;
             if (val != NotEstimatedDecimalYet)
             {
-                result = (decimal)val;
-                return result;
+                return val;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(DecimalProperties), decimalEnumId));
-            result = (decimal)GetMethodVal(classMethod);
+            decimal? result = (decimal)GetMethodVal(classMethod);
             return result;
         }
 
-        public bool GetBoolVal(BoolProperties boolEnumId)
+        public bool? GetBoolVal(BoolProperties boolEnumId)
         {
             string classPropName = GetBoolPropName(boolEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, BoolTypeDef, "GetBoolVal");
             bool? val = (bool?)this[classPropName];
-            bool result;
             if (val != NotEstimatedBoolYet)
             {
-                result = (bool)val;
-                return result;
+                return val;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(BoolProperties), boolEnumId));
-            result = (bool)GetMethodVal(classMethod);
+            bool? result = (bool)GetMethodVal(classMethod);
             return result;
         }
         #endregion
@@ -281,7 +275,7 @@ namespace CacheProperties.Estimations
         private string CalculateA4()
         {
             string result = "A4 String.";
-            if (GetBoolVal(BoolProperties.D2)) {
+            if (GetBoolVal(BoolProperties.D2) == true) {
                 result = OutA4 = GetStrVal(StrProperties.A2) + " "
                     + GetStrVal(StrProperties.A3);
                 return result ?? DefaultString;
