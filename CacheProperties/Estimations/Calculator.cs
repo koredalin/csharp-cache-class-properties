@@ -263,23 +263,54 @@ namespace CacheProperties.Estimations
         #region String Calculate Methods
         private string CalculateA1()
         {
-            return "A1 String.";
+            string result = "A1 String.";
+            return result ?? DefaultString;
         }
-        private string CalculateA2() { return "A2 String."; }
-        private string CalculateA3() { return "A3 String."; }
+        private string CalculateA2()
+        {
+            string result = "A2 String.";
+            return result ?? DefaultString;
+        }
+        private string CalculateA3()
+        {
+            string result = "A3 String.";
+            return result ?? DefaultString;
+        }
         private string CalculateA4()
         {
+            string result = "A4 String.";
             if (GetBoolVal(BoolProperties.D2) == true) {
-                return GetStrVal(StrProperties.A2) + " "
+                result = GetStrVal(StrProperties.A2) + " "
                     + GetStrVal(StrProperties.A3);
+                return result ?? DefaultString;
             }
-            return "A4 String.";
+            return result ?? DefaultString;
         }
-        private string CalculateA5() { return "A5 String."; }
-        private string CalculateA6() { return "A6 String."; }
-        private string CalculateA7() { return "A7 String."; }
-        private string CalculateA8() { return "A8 String."; }
-        private string CalculateA9() { return "A9 String."; }
+        private string CalculateA5()
+        {
+            string result = "A5 String.";
+            return result ?? DefaultString;
+        }
+        private string CalculateA6()
+        {
+            string result = "A6 String.";
+            return result ?? DefaultString;
+        }
+        private string CalculateA7()
+        {
+            string result = "A7 String.";
+            return result ?? DefaultString;
+        }
+        private string CalculateA8()
+        {
+            string result = "A8 String.";
+            return result ?? DefaultString;
+        }
+        private string CalculateA9()
+        {
+            string result = "A9 String.";
+            return result ?? DefaultString;
+        }
         #endregion
 
         /********************************************************************************************/
