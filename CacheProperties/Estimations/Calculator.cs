@@ -10,12 +10,15 @@ namespace CacheProperties.Estimations
         public static readonly string OutputPropertyPrefix = "Out";
         public static readonly string CalculateMethodPrefix = "Calculate";
 
-        #region Not Estimated Type Constants
         public static readonly string NotEstimatedStringYet = "NotEstimatedStringYet";
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
-        #endregion
+
+        public static readonly string DefaultString = "";
+        public static readonly int DefaultInt = 0;
+        public static readonly decimal DefaultDecimal = 0m;
+        public static readonly bool DefaultBool = false;
 
         private static readonly string StringTypeDef = "System.String";
         private static readonly string IntTypeDef = "System.Int";
@@ -341,9 +344,22 @@ namespace CacheProperties.Estimations
 
         #region Decimal Calculate Methods
         private decimal CalculateC1() { return 1.1m; }
-        private decimal CalculateC2() { return 2.2m; }
-        private decimal CalculateC3() { return 3.3m; }
-        private decimal CalculateC4() { return 4.4m; }
+        private decimal CalculateC2()
+        {
+            OutC3 = 3.3m;
+            OutC4 = 4.4m;
+            return 2.2m;
+        }
+        private decimal CalculateC3()
+        {
+            GetDecimalVal(DecimalProperties.C2);
+            return OutC3 ?? DefaultDecimal;
+        }
+        private decimal CalculateC4()
+        {
+            GetDecimalVal(DecimalProperties.C2);
+            return OutC4 ?? DefaultDecimal;
+        }
         private decimal CalculateC5() { return 5.5m; }
         private decimal CalculateC6() { return 6.6m; }
         private decimal CalculateC7() { return 7.7m; }
