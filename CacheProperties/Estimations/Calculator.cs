@@ -209,56 +209,50 @@ namespace CacheProperties.Estimations
             return result;
         }
 
-        public int GetIntVal(IntProperties intEnumId)
+        public int? GetIntVal(IntProperties intEnumId)
         {
             string classPropName = GetIntPropName(intEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, IntTypeDef, "GetIntVal");
             int? val = (int?)this[classPropName];
-            int result;
             if (val != NotEstimatedIntYet)
             {
-                result = (int)val;
-                return result;
+                return val;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(IntProperties), intEnumId));
-            result = (int)GetMethodVal(classMethod);
+            int? result = (int?)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
         }
 
-        public decimal GetDecimalVal(DecimalProperties decimalEnumId)
+        public decimal? GetDecimalVal(DecimalProperties decimalEnumId)
         {
             string classPropName = GetDecimalPropName(decimalEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, DecimalTypeDef, "GetDecVal");
             decimal? val = (decimal?)this[classPropName];
-            decimal result;
             if (val != NotEstimatedDecimalYet)
             {
-                result = (decimal)val;
-                return result;
+                return val;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(DecimalProperties), decimalEnumId));
-            result = (decimal)GetMethodVal(classMethod);
+            decimal? result = (decimal)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
         }
 
-        public bool GetBoolVal(BoolProperties boolEnumId)
+        public bool? GetBoolVal(BoolProperties boolEnumId)
         {
             string classPropName = GetBoolPropName(boolEnumId);
             string propertyType = GetPropertyType(classPropName);
             ThrowWrongTypePropertyException(classPropName, propertyType, BoolTypeDef, "GetBoolVal");
             bool? val = (bool?)this[classPropName];
-            bool result;
             if (val != NotEstimatedBoolYet)
             {
-                result = (bool)val;
-                return result;
+                return val;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(BoolProperties), boolEnumId));
-            result = (bool)GetMethodVal(classMethod);
+            bool? result = (bool?)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
         }
@@ -275,7 +269,7 @@ namespace CacheProperties.Estimations
         private string CalculateA3() { return "A3 String."; }
         private string CalculateA4()
         {
-            if (GetBoolVal(BoolProperties.D2)) {
+            if (GetBoolVal(BoolProperties.D2) == true) {
                 return GetStrVal(StrProperties.A2) + " "
                     + GetStrVal(StrProperties.A3);
             }
@@ -291,101 +285,176 @@ namespace CacheProperties.Estimations
         /********************************************************************************************/
 
         #region Integer Calculate Methods
-        private int CalculateB1() { return 1; }
-        private int CalculateB2() { return 2; }
-        private int CalculateB3()
+        private int? CalculateB1()
         {
-            int result = GetIntVal(IntProperties.B1);
+            int? result = 1;
+            return result ?? DefaultInt;
+        }
+        private int? CalculateB2()
+        {
+            int? result = 2;
+            return result ?? DefaultInt;
+        }
+        private int? CalculateB3()
+        {
+            int? result = GetIntVal(IntProperties.B1);
             result += GetIntVal(IntProperties.B2);
             OutZeroValues.Add(GetIntPropName(IntProperties.B3));
-            return result;
+            return result ?? DefaultInt;
         }
-        private int CalculateB4()
+        private int? CalculateB4()
         {
             OutZeroValues.Add(GetIntPropName(IntProperties.B4));
-            return 0;
+            int? result = 0;
+            return result ?? DefaultInt;
         }
-        private int CalculateB5()
+        private int? CalculateB5()
         {
-            return GetIntVal(IntProperties.B3) + GetIntVal(IntProperties.B4);
+            int? result = GetIntVal(IntProperties.B3) + GetIntVal(IntProperties.B4);
+            return result ?? DefaultInt;
         }
-        private int CalculateB6()
+        private int? CalculateB6()
         {
-            int result = GetIntVal(IntProperties.B4);
+            int? result = GetIntVal(IntProperties.B4);
             if (result == 0)
             {
                 OutZeroValues.Add(GetIntPropName(IntProperties.B6));
             }
-            return result;
+            return result ?? DefaultInt;
         }
-        private int CalculateB7()
+        private int? CalculateB7()
         {
             OutZeroValues.Add(GetIntPropName(IntProperties.B7));
-            return 7;
+            int? result = 7;
+            return result ?? DefaultInt;
         }
-        private int CalculateB8()
+        private int? CalculateB8()
         {
             int b8MaxVal = 5;
+            int? result = 8;
             if (GetIntVal(IntProperties.B7) > b8MaxVal)
             {
                 if (OutZeroValues.Contains(GetIntPropName(IntProperties.B7)))
                 {
                     OutZeroValues.Add(GetIntPropName(IntProperties.B8));
                 }
-                OutB7 = b8MaxVal;
-                return b8MaxVal;
+                result = b8MaxVal;
+                return result ?? DefaultInt;
             }
-            return 8;
+            return result ?? DefaultInt;
         }
-        private int CalculateB9() { return 9; }
+        private int? CalculateB9()
+        {
+            int? result = 9;
+            return result ?? DefaultInt;
+        }
         #endregion
 
         /********************************************************************************************/
 
         #region Decimal Calculate Methods
-        private decimal CalculateC1() { return 1.1m; }
+        private decimal? CalculateC1()
+        {
+            decimal? result = 1.1m;
+            return result ?? DefaultDecimal;
+        }
         private decimal CalculateC2()
         {
             OutC3 = 3.3m;
             OutC4 = 4.4m;
-            return 2.2m;
+            decimal? result = 2.2m;
+            return result ?? DefaultDecimal;
         }
-        private decimal CalculateC3()
+        private decimal? CalculateC3()
         {
             GetDecimalVal(DecimalProperties.C2);
             return OutC3 ?? DefaultDecimal;
         }
-        private decimal CalculateC4()
+        private decimal? CalculateC4()
         {
             GetDecimalVal(DecimalProperties.C2);
             return OutC4 ?? DefaultDecimal;
         }
-        private decimal CalculateC5() { return 5.5m; }
-        private decimal CalculateC6() { return 6.6m; }
-        private decimal CalculateC7() { return 7.7m; }
-        private decimal CalculateC8() { return 8.8m; }
-        private decimal CalculateC9() { return 9.9m; }
+        private decimal? CalculateC5()
+        {
+            decimal? result = 5.5m;
+            return result ?? DefaultDecimal;
+        }
+        private decimal? CalculateC6()
+        {
+            decimal? result = 6.6m;
+            return result ?? DefaultDecimal;
+        }
+        private decimal? CalculateC7()
+        {
+            decimal? result = 7.7m;
+            return result ?? DefaultDecimal;
+        }
+        private decimal? CalculateC8()
+        {
+            decimal? result = 8.8m;
+            return result ?? DefaultDecimal;
+        }
+        private decimal CalculateC9()
+        {
+            decimal? result = 9.9m;
+            return result ?? DefaultDecimal;
+        }
         #endregion
 
         /********************************************************************************************/
 
         #region Bool Calculate Methods
-        private bool CalculateD1() { return false; }
-        private bool CalculateD2() { return true; }
-        private bool CalculateD3() { return false; }
-        private bool CalculateD4() { return true; }
-        private bool CalculateD5() { return false; }
-        private bool CalculateD6()
+        private bool? CalculateD1()
         {
+            bool? result = true;
+            return result ?? DefaultBool;
+        }
+        private bool? CalculateD2()
+        {
+            bool? result = true;
+            return result ?? DefaultBool;
+        }
+        private bool? CalculateD3()
+        {
+            bool? result = false;
+            return result ?? DefaultBool;
+        }
+        private bool? CalculateD4()
+        {
+            bool? result = true;
+            return result ?? DefaultBool;
+        }
+        private bool? CalculateD5()
+        {
+            bool? result = false;
+            return result ?? DefaultBool;
+        }
+        private bool? CalculateD6()
+        {
+            bool? result = false;
             if (GetIntVal(IntProperties.B4) + GetDecimalVal(DecimalProperties.C4) > 66)
             {
-                return true;
+                result = true;
+                return result ?? DefaultBool;
             }
-            return false;
+            return result ?? DefaultBool;
         }
-        private bool CalculateD7() { return true; }
-        private bool CalculateD8() { return false; }
-        private bool CalculateD9() { return false; }
+        private bool? CalculateD7()
+        {
+            bool? result = true;
+            return result ?? DefaultBool;
+        }
+        private bool? CalculateD8()
+        {
+            bool? result = false;
+            return result ?? DefaultBool;
+        }
+        private bool? CalculateD9()
+        {
+            bool? result = false;
+            return result ?? DefaultBool;
+        }
         #endregion
 
         /********************************************************************************************/
