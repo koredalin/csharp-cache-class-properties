@@ -14,6 +14,7 @@ namespace CacheProperties.Estimations
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
+        public static readonly DateTime? NotEstimatedDateTimeYet = null;
 
         public static readonly string DefaultString = "";
         public static readonly int DefaultInt = 0;
@@ -264,17 +265,17 @@ namespace CacheProperties.Estimations
         private string CalculateA1()
         {
             string result = "A1 String.";
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA2()
         {
             string result = "A2 String.";
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA3()
         {
             string result = "A3 String.";
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA4()
         {
@@ -282,34 +283,34 @@ namespace CacheProperties.Estimations
             if (GetBoolVal(BoolProperties.D2) == true) {
                 result = GetStrVal(StrProperties.A2) + " "
                     + GetStrVal(StrProperties.A3);
-                return result ?? DefaultString;
+                return result;
             }
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA5()
         {
             string result = "A5 String.";
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA6()
         {
             string result = "A6 String.";
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA7()
         {
             string result = "A7 String.";
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA8()
         {
             string result = "A8 String.";
-            return result ?? DefaultString;
+            return result;
         }
         private string CalculateA9()
         {
             string result = "A9 String.";
-            return result ?? DefaultString;
+            return result;
         }
         #endregion
 
