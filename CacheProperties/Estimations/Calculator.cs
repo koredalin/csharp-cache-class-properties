@@ -66,6 +66,11 @@ namespace CacheProperties.Estimations
         public bool? OutD7 { get; private set; } = NotEstimatedBoolYet;
         public bool? OutD8 { get; private set; } = NotEstimatedBoolYet;
         public bool? OutD9 { get; private set; } = NotEstimatedBoolYet;
+        public DateTime? OutE1 { get; private set; } = NotEstimatedDateTimeYet;
+        public DateTime? OutE2 { get; private set; } = NotEstimatedDateTimeYet;
+        public DateTime? OutE3 { get; private set; } = NotEstimatedDateTimeYet;
+        public DateTime? OutE4 { get; private set; } = NotEstimatedDateTimeYet;
+        public DateTime? OutE5 { get; private set; } = NotEstimatedDateTimeYet;
         #endregion
 
         /********************************************************************************************/
