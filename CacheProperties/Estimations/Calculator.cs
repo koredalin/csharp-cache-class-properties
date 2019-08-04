@@ -14,7 +14,8 @@ namespace CacheProperties.Estimations
         public static readonly int? NotEstimatedIntYet = null;
         public static readonly decimal? NotEstimatedDecimalYet = null;
         public static readonly bool? NotEstimatedBoolYet = null;
-        public static readonly DateTime? NotEstimatedDateTimeYet = null;
+        // Completely random datetime, which is very custom case. After all - if the result is equal to this value the method could be estimated several times. No problem /this shoud be very rare case/.
+        public static readonly DateTime? NotEstimatedDateTimeYet = new DateTime(2008, 5, 1, 8, 30, 52);
 
         public static readonly string DefaultString = "";
         public static readonly int DefaultInt = 0;
@@ -25,6 +26,7 @@ namespace CacheProperties.Estimations
         private static readonly string IntTypeDef = "System.Int";
         private static readonly string DecimalTypeDef = "System.Decimal";
         private static readonly string BoolTypeDef = "System.Bool";
+        private static readonly string DateTimeTypeDef = "System.DateTime";
 
         /*******************************************************************************/
 
@@ -148,6 +150,10 @@ namespace CacheProperties.Estimations
         {
             return OutputPropertyPrefix + Enum.GetName(typeof(BoolProperties), property);
         }
+        private string GetDateTimePropName(DateTimeProperties property)
+        {
+            return OutputPropertyPrefix + Enum.GetName(typeof(DateTimeProperties), property);
+        }
         #endregion
 
         /********************************************************************************************/
@@ -170,6 +176,10 @@ namespace CacheProperties.Estimations
             foreach (BoolProperties classProp in (BoolProperties[])Enum.GetValues(typeof(BoolProperties)))
             {
                 GetBoolVal(classProp);
+            };
+            foreach (DateTimeProperties classProp in (DateTimeProperties[])Enum.GetValues(typeof(DateTimeProperties)))
+            {
+                GetDateTimeVal(classProp);
             };
         }
 
@@ -215,7 +225,7 @@ namespace CacheProperties.Estimations
             return result;
         }
 
-        public int? GetIntVal(IntProperties intEnumId)
+        public int GetIntVal(IntProperties intEnumId)
         {
             string classPropName = GetIntPropName(intEnumId);
             string propertyType = GetPropertyType(classPropName);
@@ -223,15 +233,15 @@ namespace CacheProperties.Estimations
             int? val = (int?)this[classPropName];
             if (val != NotEstimatedIntYet)
             {
-                return val;
+                return val ?? DefaultInt;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(IntProperties), intEnumId));
-            int? result = (int?)GetMethodVal(classMethod);
+            int result = (int)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
         }
 
-        public decimal? GetDecimalVal(DecimalProperties decimalEnumId)
+        public decimal GetDecimalVal(DecimalProperties decimalEnumId)
         {
             string classPropName = GetDecimalPropName(decimalEnumId);
             string propertyType = GetPropertyType(classPropName);
@@ -239,15 +249,15 @@ namespace CacheProperties.Estimations
             decimal? val = (decimal?)this[classPropName];
             if (val != NotEstimatedDecimalYet)
             {
-                return val;
+                return val ?? DefaultDecimal;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(DecimalProperties), decimalEnumId));
-            decimal? result = (decimal)GetMethodVal(classMethod);
+            decimal result = (decimal)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
         }
 
-        public bool? GetBoolVal(BoolProperties boolEnumId)
+        public bool GetBoolVal(BoolProperties boolEnumId)
         {
             string classPropName = GetBoolPropName(boolEnumId);
             string propertyType = GetPropertyType(classPropName);
@@ -255,10 +265,26 @@ namespace CacheProperties.Estimations
             bool? val = (bool?)this[classPropName];
             if (val != NotEstimatedBoolYet)
             {
-                return val;
+                return val ?? DefaultBool;
             }
             string classMethod = GetCalcMethodName(Enum.GetName(typeof(BoolProperties), boolEnumId));
-            bool? result = (bool?)GetMethodVal(classMethod);
+            bool result = (bool)GetMethodVal(classMethod);
+            this[classPropName] = result;
+            return result;
+        }
+
+        public DateTime? GetDateTimeVal(DateTimeProperties dateTimeEnumId)
+        {
+            string classPropName = GetDateTimePropName(dateTimeEnumId);
+            string propertyType = GetPropertyType(classPropName);
+            ThrowWrongTypePropertyException(classPropName, propertyType, DateTimeTypeDef, "GetDateTimeVal");
+            DateTime? val = (DateTime?)this[classPropName];
+            if (val != NotEstimatedDateTimeYet)
+            {
+                return val;
+            }
+            string classMethod = GetCalcMethodName(Enum.GetName(typeof(DateTimeProperties), dateTimeEnumId));
+            DateTime? result = (DateTime?)GetMethodVal(classMethod);
             this[classPropName] = result;
             return result;
         }
@@ -322,53 +348,53 @@ namespace CacheProperties.Estimations
         /********************************************************************************************/
 
         #region Integer Calculate Methods
-        private int? CalculateB1()
+        private int CalculateB1()
         {
-            int? result = 1;
-            return result ?? DefaultInt;
+            int result = 1;
+            return result;
         }
-        private int? CalculateB2()
+        private int CalculateB2()
         {
-            int? result = 2;
-            return result ?? DefaultInt;
+            int result = 2;
+            return result;
         }
-        private int? CalculateB3()
+        private int CalculateB3()
         {
-            int? result = GetIntVal(IntProperties.B1);
+            int result = GetIntVal(IntProperties.B1);
             result += GetIntVal(IntProperties.B2);
             OutZeroValues.Add(GetIntPropName(IntProperties.B3));
-            return result ?? DefaultInt;
+            return result;
         }
-        private int? CalculateB4()
+        private int CalculateB4()
         {
             OutZeroValues.Add(GetIntPropName(IntProperties.B4));
-            int? result = 0;
-            return result ?? DefaultInt;
+            int result = 0;
+            return result;
         }
-        private int? CalculateB5()
+        private int CalculateB5()
         {
-            int? result = GetIntVal(IntProperties.B3) + GetIntVal(IntProperties.B4);
-            return result ?? DefaultInt;
+            int result = GetIntVal(IntProperties.B3) + GetIntVal(IntProperties.B4);
+            return result;
         }
-        private int? CalculateB6()
+        private int CalculateB6()
         {
-            int? result = GetIntVal(IntProperties.B4);
+            int result = GetIntVal(IntProperties.B4);
             if (result == 0)
             {
                 OutZeroValues.Add(GetIntPropName(IntProperties.B6));
             }
-            return result ?? DefaultInt;
+            return result;
         }
-        private int? CalculateB7()
+        private int CalculateB7()
         {
             OutZeroValues.Add(GetIntPropName(IntProperties.B7));
-            int? result = 7;
-            return result ?? DefaultInt;
+            int result = 7;
+            return result;
         }
-        private int? CalculateB8()
+        private int CalculateB8()
         {
             int b8MaxVal = 5;
-            int? result = 8;
+            int result = 8;
             if (GetIntVal(IntProperties.B7) > b8MaxVal)
             {
                 if (OutZeroValues.Contains(GetIntPropName(IntProperties.B7)))
@@ -376,121 +402,156 @@ namespace CacheProperties.Estimations
                     OutZeroValues.Add(GetIntPropName(IntProperties.B8));
                 }
                 result = b8MaxVal;
-                return result ?? DefaultInt;
+                return result;
             }
-            return result ?? DefaultInt;
+            return result;
         }
-        private int? CalculateB9()
+        private int CalculateB9()
         {
-            int? result = 9;
-            return result ?? DefaultInt;
+            int result = 9;
+            return result;
         }
         #endregion
 
         /********************************************************************************************/
 
         #region Decimal Calculate Methods
-        private decimal? CalculateC1()
+        private decimal CalculateC1()
         {
-            decimal? result = 1.1m;
-            return result ?? DefaultDecimal;
+            decimal result = 1.1m;
+            return result;
         }
+        // OutC2, OutC3, OutC4 are custom cases. C2 sets C3 and C4 values and OutC3, OutC4 just return thier already set values.
         private decimal CalculateC2()
         {
             OutC3 = 3.3m;
             OutC4 = 4.4m;
-            decimal? result = 2.2m;
-            return result ?? DefaultDecimal;
+            decimal result = 2.2m;
+            return result;
         }
-        private decimal? CalculateC3()
+        private decimal CalculateC3()
         {
             GetDecimalVal(DecimalProperties.C2);
             return OutC3 ?? DefaultDecimal;
         }
-        private decimal? CalculateC4()
+        private decimal CalculateC4()
         {
             GetDecimalVal(DecimalProperties.C2);
             return OutC4 ?? DefaultDecimal;
         }
-        private decimal? CalculateC5()
+        private decimal CalculateC5()
         {
-            decimal? result = 5.5m;
-            return result ?? DefaultDecimal;
+            decimal result = 5.5m;
+            return result;
         }
-        private decimal? CalculateC6()
+        private decimal CalculateC6()
         {
-            decimal? result = 6.6m;
-            return result ?? DefaultDecimal;
+            decimal result = 6.6m;
+            return result;
         }
-        private decimal? CalculateC7()
+        private decimal CalculateC7()
         {
-            decimal? result = 7.7m;
-            return result ?? DefaultDecimal;
+            decimal result = 7.7m;
+            return result;
         }
-        private decimal? CalculateC8()
+        private decimal CalculateC8()
         {
-            decimal? result = 8.8m;
-            return result ?? DefaultDecimal;
+            decimal result = 8.8m;
+            return result;
         }
         private decimal CalculateC9()
         {
-            decimal? result = 9.9m;
-            return result ?? DefaultDecimal;
+            decimal result = 9.9m;
+            return result;
         }
         #endregion
 
         /********************************************************************************************/
 
         #region Bool Calculate Methods
-        private bool? CalculateD1()
+        private bool CalculateD1()
         {
-            bool? result = true;
-            return result ?? DefaultBool;
+            bool result = true;
+            return result;
         }
-        private bool? CalculateD2()
+        private bool CalculateD2()
         {
-            bool? result = true;
-            return result ?? DefaultBool;
+            bool result = true;
+            return result;
         }
-        private bool? CalculateD3()
+        private bool CalculateD3()
         {
-            bool? result = false;
-            return result ?? DefaultBool;
+            bool result = false;
+            return result;
         }
-        private bool? CalculateD4()
+        private bool CalculateD4()
         {
-            bool? result = true;
-            return result ?? DefaultBool;
+            bool result = true;
+            return result;
         }
-        private bool? CalculateD5()
+        private bool CalculateD5()
         {
-            bool? result = false;
-            return result ?? DefaultBool;
+            bool result = false;
+            return result;
         }
-        private bool? CalculateD6()
+        private bool CalculateD6()
         {
-            bool? result = false;
+            bool result = false;
             if (GetIntVal(IntProperties.B4) + GetDecimalVal(DecimalProperties.C4) > 66)
             {
                 result = true;
-                return result ?? DefaultBool;
+                return result;
             }
-            return result ?? DefaultBool;
+            return result;
         }
-        private bool? CalculateD7()
+        private bool CalculateD7()
         {
-            bool? result = true;
-            return result ?? DefaultBool;
+            bool result = true;
+            return result;
         }
-        private bool? CalculateD8()
+        private bool CalculateD8()
         {
-            bool? result = false;
-            return result ?? DefaultBool;
+            bool result = false;
+            return result;
         }
-        private bool? CalculateD9()
+        private bool CalculateD9()
         {
-            bool? result = false;
-            return result ?? DefaultBool;
+            bool result = false;
+            return result;
+        }
+        #endregion
+
+        /********************************************************************************************/
+
+        #region DateTime Nullable Calculate Methods
+        private DateTime? CalculateE1()
+        {
+            DateTime? result = null;
+            return result;
+        }
+        private DateTime? CalculateE2()
+        {
+            DateTime? result = new DateTime(2008, 3, 1);
+            return result;
+        }
+        private DateTime? CalculateE3()
+        {
+            DateTime? result = DateTime.Now;
+            return result;
+        }
+        private DateTime CalculateE4()
+        {
+            DateTime result = DateTime.Now;
+            if (GetBoolVal(BoolProperties.D7))
+            {
+                result = result.AddDays(10);
+            }
+            return result;
+        }
+        private DateTime? CalculateE5()
+        {
+            DateTime? result = null;
+            return result;
         }
         #endregion
 

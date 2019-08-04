@@ -55,4 +55,13 @@ namespace CacheProperties.Estimations
         D8,
         D9,
     };
+
+    public enum DateTimeProperties
+    {
+        E1,
+        E2,
+        E3,
+        E4,
+        E5,
+    };
 }
